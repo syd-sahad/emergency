@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal One-Tap Emergency ID</title>
@@ -138,6 +139,10 @@
     </div>
 
     <script>
+        // INITIALIZE SUPABASE
+        // Replace the placeholders below with your Supabase Project URL and anon key
+        const _supabase = supabase.createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+
         function checkPassword() {
             if (document.getElementById('site-pass').value === "admin123") {
                 showPage('main-hub');
@@ -151,34 +156,49 @@
             document.getElementById(id).classList.remove('hidden');
         }
 
-        function saveData() {
-            const data = {
+        // SAVE TO DATABASE
+        async function saveData() {
+            const patientData = {
                 name: document.getElementById('p-name').value,
-                blood: document.getElementById('p-blood').value,
+                blood_type: document.getElementById('p-blood').value,
                 allergies: document.getElementById('p-allergies').value,
                 contact: document.getElementById('p-contact').value
             };
-            localStorage.setItem('patient_data', JSON.stringify(data));
-            alert("Data Saved Securely!");
-            showPage('main-hub');
+
+            const { error } = await _supabase.from('patients').insert([patientData]);
+
+            if (error) {
+                alert("Error saving: " + error.message);
+            } else {
+                alert("Data Saved to Cloud DB!");
+                showPage('main-hub');
+            }
         }
 
-        function triggerBiometric() {
+        // GET FROM DATABASE
+        async function triggerBiometric() {
             showPage('scan-overlay');
             const scanText = document.getElementById('scan-text');
             
             setTimeout(() => scanText.innerText = "SCANNING RETINA...", 2000);
             
-            setTimeout(() => {
-                const data = JSON.parse(localStorage.getItem('patient_data'));
-                if (data) {
-                    document.getElementById('res-name').innerText = data.name;
-                    document.getElementById('res-blood').innerText = data.blood;
-                    document.getElementById('res-allergies').innerText = data.allergies;
-                    document.getElementById('res-contact').innerText = data.contact;
+            setTimeout(async () => {
+                // We fetch the latest person added for the demo
+                const { data, error } = await _supabase
+                    .from('patients')
+                    .select('*')
+                    .order('created_at', { ascending: false })
+                    .limit(1);
+
+                if (data && data.length > 0) {
+                    const p = data[0];
+                    document.getElementById('res-name').innerText = p.name;
+                    document.getElementById('res-blood').innerText = p.blood_type || '';
+                    document.getElementById('res-allergies').innerText = p.allergies || '';
+                    document.getElementById('res-contact').innerText = p.contact || '';
                     showPage('result-page');
                 } else {
-                    alert("No data found! Upload data first.");
+                    alert("No data found in Database!");
                     showPage('main-hub');
                 }
             }, 4000);
