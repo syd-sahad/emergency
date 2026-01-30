@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal One-Tap Emergency ID</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <style>
         .hidden { display: none; }
@@ -19,14 +19,12 @@
             100% { top: 110%; }
         }
 
-        /* Glass effect */
         .glass {
             background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255,255,255,0.08);
         }
 
-        /* Soft glow */
         .glow {
             box-shadow: 0 0 40px rgba(59,130,246,0.25);
         }
@@ -35,13 +33,11 @@
 
 <body class="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-950 via-slate-900 to-blue-950 text-white font-sans">
 
-    <div id="password-screen" class="glass glow w-80 p-8 rounded-2xl text-center animate-fade-in">
+    <div id="password-screen" class="glass glow w-80 p-8 rounded-2xl text-center">
         <h2 class="text-2xl font-bold mb-1 tracking-wide">Hospital Login</h2>
         <p class="text-xs text-slate-400 mb-6">Authorized medical access only</p>
-
         <input type="password" id="site-pass" placeholder="Enter Password"
                class="w-full p-3 rounded-lg bg-slate-900 border border-slate-700 mb-4 focus:ring-2 focus:ring-blue-500 outline-none">
-
         <button onclick="checkPassword()"
                 class="w-full py-3 rounded-lg font-bold bg-gradient-to-r from-blue-600 to-blue-500 hover:scale-[1.02] transition shadow-lg">
             Access System
@@ -49,22 +45,16 @@
     </div>
 
     <div id="main-hub" class="hidden text-center">
-        <h1 class="text-4xl font-extrabold mb-2 text-blue-400 tracking-wide">
-            Universal Emergency ID
-        </h1>
-        <p class="text-slate-400 mb-10 text-sm">
-            One-tap access to life-critical medical data
-        </p>
-
+        <h1 class="text-4xl font-extrabold mb-2 text-blue-400 tracking-wide">Universal Emergency ID</h1>
+        <p class="text-slate-400 mb-10 text-sm">One-tap access to life-critical medical data</p>
         <div class="flex gap-8 justify-center">
             <button onclick="showPage('upload-page')"
-                    class="group p-10 w-48 bg-gradient-to-br from-emerald-600 to-emerald-500 rounded-3xl shadow-xl transition-all hover:-translate-y-2 hover:shadow-emerald-500/40">
+                    class="group p-10 w-48 bg-gradient-to-br from-emerald-600 to-emerald-500 rounded-3xl shadow-xl transition-all hover:-translate-y-2">
                 <div class="text-5xl mb-3 group-hover:scale-110 transition">📥</div>
                 <span class="font-bold tracking-wide">Upload Data</span>
             </button>
-
             <button onclick="triggerBiometric()"
-                    class="group p-10 w-48 bg-gradient-to-br from-blue-600 to-blue-500 rounded-3xl shadow-xl transition-all hover:-translate-y-2 hover:shadow-blue-500/40">
+                    class="group p-10 w-48 bg-gradient-to-br from-blue-600 to-blue-500 rounded-3xl shadow-xl transition-all hover:-translate-y-2">
                 <div class="text-5xl mb-3 group-hover:scale-110 transition">🔍</div>
                 <span class="font-bold tracking-wide">Get Data</span>
             </button>
@@ -73,49 +63,28 @@
 
     <div id="upload-page" class="hidden glass p-8 rounded-2xl w-96">
         <h2 class="text-xl font-bold mb-4">Patient Enrollment</h2>
-
-        <input type="text" id="p-name" placeholder="Full Name"
-               class="w-full p-2 bg-slate-900 rounded mb-3 border border-slate-700">
-
-        <select id="p-blood"
-                class="w-full p-2 bg-slate-900 rounded mb-3 border border-slate-700">
-            <option>Select Blood Type</option>
+        <input type="text" id="p-name" placeholder="Full Name" class="w-full p-2 bg-slate-900 rounded mb-3 border border-slate-700">
+        <select id="p-blood" class="w-full p-2 bg-slate-900 rounded mb-3 border border-slate-700">
+            <option value="">Select Blood Type</option>
             <option>A+</option><option>O+</option><option>B-</option><option>AB+</option>
         </select>
-
-        <textarea id="p-allergies" placeholder="Critical Allergies"
-                  class="w-full p-2 bg-slate-900 rounded mb-3 border border-slate-700"></textarea>
-
-        <input type="text" id="p-contact" placeholder="Emergency Phone"
-               class="w-full p-2 bg-slate-900 rounded mb-4 border border-slate-700">
-
-        <button onclick="saveData()"
-                class="w-full py-2 rounded-lg font-bold bg-emerald-600 hover:bg-emerald-500 transition">
-            Save to Secure DB
-        </button>
-
-        <button onclick="showPage('main-hub')"
-                class="w-full mt-2 text-slate-400 text-sm hover:text-white transition">
-            Cancel
-        </button>
+        <textarea id="p-allergies" placeholder="Critical Allergies" class="w-full p-2 bg-slate-900 rounded mb-3 border border-slate-700"></textarea>
+        <input type="text" id="p-contact" placeholder="Emergency Phone" class="w-full p-2 bg-slate-900 rounded mb-4 border border-slate-700">
+        <button onclick="saveData()" class="w-full py-2 rounded-lg font-bold bg-emerald-600 hover:bg-emerald-500 transition">Save to Secure DB</button>
+        <button onclick="showPage('main-hub')" class="w-full mt-2 text-slate-400 text-sm">Cancel</button>
     </div>
 
     <div id="scan-overlay" class="hidden fixed inset-0 bg-black/90 flex flex-col items-center justify-center">
         <div class="relative w-48 h-64 border-2 border-blue-500 rounded-xl overflow-hidden mb-6">
             <div class="scanning-animation absolute w-full h-1 bg-blue-400 shadow-[0_0_20px_#60a5fa]"></div>
-            <img src="https://cdn-icons-png.flaticon.com/512/2566/2566115.png"
-                 class="opacity-30 p-8" alt="Fingerprint">
+            <img src="https://cdn-icons-png.flaticon.com/512/2566/2566115.png" class="opacity-30 p-8" alt="Fingerprint">
         </div>
-        <p class="text-blue-400 animate-pulse font-mono text-xl" id="scan-text">
-            SCANNING FINGERPRINT...
-        </p>
+        <p class="text-blue-400 animate-pulse font-mono text-xl" id="scan-text">SCANNING FINGERPRINT...</p>
     </div>
 
-    <div id="result-page"
-         class="hidden p-8 bg-white text-slate-900 rounded-xl w-96 shadow-[0_0_30px_rgba(59,130,246,0.5)] border-t-8 border-red-600">
+    <div id="result-page" class="hidden p-8 bg-white text-slate-900 rounded-xl w-96 shadow-2xl border-t-8 border-red-600">
         <h2 class="text-xs font-black text-red-600 mb-1">EMERGENCY MEDICAL RECORD</h2>
         <h1 id="res-name" class="text-2xl font-bold border-b pb-2 mb-4">John Doe</h1>
-
         <div class="grid grid-cols-2 gap-4">
             <div>
                 <p class="text-xs text-slate-500">BLOOD TYPE</p>
@@ -126,22 +95,23 @@
                 <p id="res-contact" class="font-bold">999-000-111</p>
             </div>
         </div>
-
         <div class="mt-4 p-3 bg-red-100 rounded">
             <p class="text-xs text-red-800 font-bold">CRITICAL ALLERGIES</p>
             <p id="res-allergies" class="text-sm">Peanuts, Penicillin</p>
         </div>
-
-        <button onclick="showPage('main-hub')"
-                class="w-full mt-6 bg-slate-800 text-white p-2 rounded hover:bg-slate-900 transition">
-            Close Record
-        </button>
+        <button onclick="showPage('main-hub')" class="w-full mt-6 bg-slate-800 text-white p-2 rounded">Close Record</button>
     </div>
 
     <script>
-        // INITIALIZE SUPABASE
-        // Replace the placeholders below with your Supabase Project URL and anon key
-        const _supabase = supabase.createClient('YOUR_SUPABASE_URL', 'YOUR_SUPABASE_ANON_KEY');
+        // Supabase Credentials
+        const SB_URL = 'https://clyfmhucgcbkehsmxysr.supabase.co';
+        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNseWZtaHVjZ2Nia2Voc214eXNyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njk3MDA2NjEsImV4cCI6MjA4NTI3NjY2MX0.QxWi-rIDMXMcjLLytxi9dbSoKdOuzbvZBlsDgTbcisM';
+        const _supabase = supabase.createClient(SB_URL, SB_KEY);
+
+        function showPage(id) {
+            document.querySelectorAll('body > div').forEach(div => div.classList.add('hidden'));
+            document.getElementById(id).classList.remove('hidden');
+        }
 
         function checkPassword() {
             if (document.getElementById('site-pass').value === "admin123") {
@@ -151,12 +121,6 @@
             }
         }
 
-        function showPage(id) {
-            document.querySelectorAll('body > div').forEach(div => div.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-        }
-
-        // SAVE TO DATABASE
         async function saveData() {
             const patientData = {
                 name: document.getElementById('p-name').value,
@@ -168,37 +132,42 @@
             const { error } = await _supabase.from('patients').insert([patientData]);
 
             if (error) {
-                alert("Error saving: " + error.message);
+                alert("Database Error: " + error.message);
             } else {
-                alert("Data Saved to Cloud DB!");
+                alert("Success! Patient enrolled in Cloud DB.");
                 showPage('main-hub');
             }
         }
 
-        // GET FROM DATABASE
         async function triggerBiometric() {
             showPage('scan-overlay');
             const scanText = document.getElementById('scan-text');
             
-            setTimeout(() => scanText.innerText = "SCANNING RETINA...", 2000);
+            setTimeout(() => { scanText.innerText = "SCANNING RETINA..."; }, 2000);
             
             setTimeout(async () => {
-                // We fetch the latest person added for the demo
-                const { data, error } = await _supabase
-                    .from('patients')
-                    .select('*')
-                    .order('created_at', { ascending: false })
-                    .limit(1);
+                try {
+                    const { data, error } = await _supabase
+                        .from('patients')
+                        .select('*')
+                        .order('created_at', { ascending: false })
+                        .limit(1);
 
-                if (data && data.length > 0) {
-                    const p = data[0];
-                    document.getElementById('res-name').innerText = p.name;
-                    document.getElementById('res-blood').innerText = p.blood_type || '';
-                    document.getElementById('res-allergies').innerText = p.allergies || '';
-                    document.getElementById('res-contact').innerText = p.contact || '';
-                    showPage('result-page');
-                } else {
-                    alert("No data found in Database!");
+                    if (error) throw error;
+
+                    if (data && data.length > 0) {
+                        const p = data[0];
+                        document.getElementById('res-name').innerText = p.name;
+                        document.getElementById('res-blood').innerText = p.blood_type || 'N/A';
+                        document.getElementById('res-allergies').innerText = p.allergies || 'None';
+                        document.getElementById('res-contact').innerText = p.contact || 'N/A';
+                        showPage('result-page');
+                    } else {
+                        alert("No records found in database. Please upload data first.");
+                        showPage('main-hub');
+                    }
+                } catch (err) {
+                    alert("System Error: " + err.message);
                     showPage('main-hub');
                 }
             }, 4000);
