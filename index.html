@@ -31,7 +31,7 @@
             <div class="z-10 text-center">
                 <div class="text-6xl mb-6">🏥</div>
                 <h1 class="text-4xl font-bold text-white mb-4 tracking-tight">Universal Emergency ID</h1>
-                <p class="text-blue-300/80 text-lg max-w-md">The unified global standard for critical medical data retrieval in emergency care scenarios.</p>
+                <p class="text-blue-300/80 text-lg max-w-md">The unified global standard for critical medical data retrieval.</p>
             </div>
         </div>
 
@@ -39,16 +39,16 @@
             <div class="w-full max-w-md">
                 <div class="mb-10 text-center lg:text-left">
                     <h2 class="text-3xl font-bold text-slate-900 mb-2">Hospital Access</h2>
-                    <p class="text-slate-500">Please enter your authorization key to proceed.</p>
+                    <p class="text-slate-500">Enter authorization key to proceed.</p>
                 </div>
                 <div class="space-y-6">
                     <div>
                         <label class="block text-sm font-semibold text-slate-700 mb-2">Access Password</label>
                         <input type="password" id="site-pass" placeholder="••••••••"
-                               class="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 focus:bg-white outline-none transition-all">
+                               class="w-full p-4 rounded-xl bg-slate-50 border border-slate-200 focus:ring-2 focus:ring-blue-500 outline-none transition-all">
                     </div>
                     <button onclick="checkPassword()"
-                            class="w-full py-4 rounded-xl font-bold bg-slate-900 text-white hover:bg-blue-600 transition-all shadow-xl shadow-blue-500/10 active:scale-[0.98]">
+                            class="w-full py-4 rounded-xl font-bold bg-slate-900 text-white hover:bg-blue-600 transition-all shadow-xl shadow-blue-500/10">
                         Unlock System
                     </button>
                 </div>
@@ -62,65 +62,39 @@
                 <span class="text-2xl">🏥</span>
                 <span class="font-bold text-xl tracking-tight text-slate-800">Emergency Dashboard</span>
             </div>
-            <div class="flex items-center gap-4">
-                <div class="text-right">
-                    <p class="text-xs font-bold text-slate-400 uppercase">Hospital ID</p>
-                    <p class="text-sm font-medium text-slate-700">Central City Hospital</p>
-                </div>
-                <button onclick="location.reload()" class="bg-slate-100 p-2 rounded-full hover:bg-red-50 hover:text-red-600 transition">
-                    🚪
-                </button>
-            </div>
+            <button onclick="location.reload()" class="text-sm font-bold text-slate-400 hover:text-red-600 transition">LOGOUT</button>
         </nav>
 
         <main class="p-8 max-w-6xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <p class="text-slate-500 text-sm font-medium mb-1">Active Database</p>
-                    <h3 class="text-2xl font-bold text-slate-900">Connected</h3>
+            <div class="mb-10">
+                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm inline-block min-w-[300px]">
+                    <p class="text-slate-500 text-sm font-medium mb-1">Database Connectivity</p>
+                    <h3 class="text-2xl font-bold text-slate-900">Cloud Sync Active</h3>
                     <div class="mt-2 text-xs text-emerald-600 font-bold flex items-center gap-1">
-                        <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> Supabase Cloud Sync
+                        <span class="w-2 h-2 bg-emerald-500 rounded-full"></span> Supabase Real-time
                     </div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <p class="text-slate-500 text-sm font-medium mb-1">Authorization</p>
-                    <h3 class="text-2xl font-bold text-slate-900">Level 4</h3>
-                    <div class="mt-2 text-xs text-blue-600 font-bold">Medical Admin Access</div>
-                </div>
-                <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
-                    <p class="text-slate-500 text-sm font-medium mb-1">System Status</p>
-                    <h3 class="text-2xl font-bold text-slate-900">Normal</h3>
-                    <div class="mt-2 text-xs text-slate-400">All systems operational</div>
                 </div>
             </div>
 
-            <h2 class="text-lg font-bold text-slate-800 mb-6">Core Operations</h2>
+            <h2 class="text-lg font-bold text-slate-800 mb-6">Operations</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <button onclick="triggerBiometric()" 
                         class="group bg-blue-600 p-1 rounded-3xl transition-transform hover:scale-[1.01] active:scale-95 text-left">
                     <div class="bg-white rounded-[1.4rem] p-8 h-full">
-                        <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                            🔍
-                        </div>
+                        <div class="w-14 h-14 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">🔍</div>
                         <h3 class="text-2xl font-bold text-slate-900 mb-2">Identify Patient</h3>
-                        <p class="text-slate-500 leading-relaxed">Instantly retrieve life-saving medical history, allergies, and blood types via biometric verification.</p>
-                        <div class="mt-8 flex items-center font-bold text-blue-600 gap-2">
-                            Launch Scanner <span>→</span>
-                        </div>
+                        <p class="text-slate-500 leading-relaxed">Retrieve medical history and blood types via biometric verification.</p>
+                        <div class="mt-8 flex items-center font-bold text-blue-600 gap-2">Launch Scanner <span>→</span></div>
                     </div>
                 </button>
 
                 <button onclick="showPage('upload-page')" 
                         class="group bg-slate-200 p-1 rounded-3xl transition-transform hover:scale-[1.01] active:scale-95 text-left">
                     <div class="bg-white rounded-[1.4rem] p-8 h-full">
-                        <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                            📥
-                        </div>
+                        <div class="w-14 h-14 bg-slate-100 rounded-2xl flex items-center justify-center text-3xl mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-colors">📥</div>
                         <h3 class="text-2xl font-bold text-slate-900 mb-2">Patient Enrollment</h3>
-                        <p class="text-slate-500 leading-relaxed">Securely register new patients into the global emergency network to ensure future care safety.</p>
-                        <div class="mt-8 flex items-center font-bold text-slate-400 gap-2 group-hover:text-emerald-600 transition-colors">
-                            Enter Database <span>→</span>
-                        </div>
+                        <p class="text-slate-500 leading-relaxed">Register new patients into the secure emergency network.</p>
+                        <div class="mt-8 flex items-center font-bold text-slate-400 gap-2 group-hover:text-emerald-600 transition-colors">Enter Data <span>→</span></div>
                     </div>
                 </button>
             </div>
@@ -131,13 +105,23 @@
         <div class="bg-white p-8 rounded-3xl w-full max-w-md shadow-xl border border-slate-200">
             <h2 class="text-2xl font-bold text-slate-900 mb-6">Patient Enrollment</h2>
             <div class="space-y-4">
-                <input type="text" id="p-name" placeholder="Full Name" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none focus:ring-2 focus:ring-blue-500">
+                <input type="text" id="p-name" placeholder="Full Name" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none">
+                
                 <select id="p-blood" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none">
                     <option value="">Select Blood Type</option>
-                    <option>A+</option><option>O+</option><option>B-</option><option>AB+</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
                 </select>
+
                 <textarea id="p-allergies" placeholder="Critical Allergies" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none h-24"></textarea>
                 <input type="text" id="p-contact" placeholder="Emergency Phone" class="w-full p-3 bg-slate-50 rounded-xl border border-slate-200 outline-none">
+                
                 <button onclick="saveData()" class="w-full py-4 rounded-xl font-bold bg-emerald-600 hover:bg-emerald-500 text-white transition-all">Save Record</button>
                 <button onclick="showPage('main-hub')" class="w-full text-slate-400 text-sm hover:text-slate-600 transition">Return to Dashboard</button>
             </div>
@@ -157,7 +141,7 @@
             <div class="flex justify-between items-start mb-6">
                 <div>
                     <h2 class="text-xs font-black text-red-600 uppercase tracking-tighter">Medical Alert</h2>
-                    <h1 id="res-name" class="text-3xl font-bold text-slate-900">John Doe</h1>
+                    <h1 id="res-name" class="text-3xl font-bold text-slate-900">--</h1>
                 </div>
                 <div class="bg-red-50 p-2 rounded-lg text-red-600 font-bold">CRITICAL</div>
             </div>
@@ -206,7 +190,7 @@
             };
             const { error } = await _supabase.from('patients').insert([patientData]);
             if (error) { alert("Error: " + error.message); } 
-            else { alert("Success!"); showPage('main-hub'); }
+            else { alert("Success! Record Saved."); showPage('main-hub'); }
         }
 
         async function triggerBiometric() {
